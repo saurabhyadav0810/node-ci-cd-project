@@ -12,19 +12,19 @@ pipeline {
 
         stage('Build Docker Image') {
             steps {
-                bat 'docker build -t professional-website .'
+                sh 'docker build -t professional-website .'
             }
         }
 
         stage('Remove Old Container') {
             steps {
-                bat 'docker rm -f professional-container || exit 0'
+                sh 'docker rm -f professional-container || true'
             }
         }
 
         stage('Deploy Website') {
             steps {
-                bat 'docker run -d -p 8090:80 --name professional-container professional-website'
+                sh 'docker run -d -p 8090:80 --name professional-container professional-website'
             }
         }
 
